@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import useHover from './use-hover';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+  const [hoverRef, isHovered] = useHover();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+    <div
+      ref={hoverRef}
+      style={{
+        color: 'pink',
+        padding: '8rem',
+        width: '12rem',
+        textAlign: 'center',
+        fontSize: '15rem',
+        backgroundColor: isHovered ? '#0ca0fb' : '#4f8e40'
+      }}
+    >
+      {isHovered ? 'hi' : 'by'}
+    </div>
+  );
+}
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
